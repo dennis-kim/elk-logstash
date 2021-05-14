@@ -1,0 +1,29 @@
+version: '2'
+services:
+  shop-logstash:
+    image: logstash:${ES_VERSION}
+    container_name: ${LOGSTASH_CONTAINER_NAME}
+    restart: unless-stopped
+    environment:
+      LANG: en_US.utf8
+      PIPELINE_WORKERS: 8
+      xpack.monitoring.elasticsearch.hosts: ${ELASTICSEARCH_HOSTS}
+      TZ: Asia/Seoul
+      LS_JAVA_OPTS: "-Xms512m -Xmx512m"
+      JDBC_CONNECTION_STRING: "${JDBC_CONNECTION_STRING}"
+      JDBC_USER: "${JDBC_USER}"
+      JDBC_PASSWORD: "${JDBC_PASSWORD}"
+      JDBC_DRIVER_LIBRARY: ""
+      JDBC_DRIVER_CLASS: "${JDBC_DRIVER_CLASS}"
+      ELASTICSEARCH_HOSTS: "${ELASTICSEARCH_HOSTS}"
+      STATEMENT_FILE_PATH: "${STATEMENT_FILE_PATH}"
+      HTTP.HOST: "${LOGSTASH_HOST}"
+      HTTP.PORT: "${LOGSTASH_PORT}"
+    ports:
+      - ${LOGSTASH_PORT}:${LOGSTASH_PORT}
+    volumes:
+      - ${LOGSTASH_HOME_DIR}/config:/usr/share/logstash/config
+      - ${LOGSTASH_HOME_DIR}/pipeline:/usr/share/logstash/pipeline
+      - ${LOGSTASH_HOME_DIR}/sql:/usr/share/logstash/sql
+      - ${LOGSTASH_HOME_DIR}/../source:/usr/share/logstash/source
+    network_mode: bridge

@@ -1,0 +1,7 @@
+config:
+  support_escapes: true
+http.host: 0.0.0.0
+http.port: 5044
+pipeline.workers: 16
+xpack.monitoring.elasticsearch.hosts: http://192.168.28.57:9200
+xpack.monitoring.enabled: true
