@@ -6,7 +6,7 @@ services:
     restart: unless-stopped
     environment:
       LANG: en_US.utf8
-      PIPELINE_WORKERS: 8
+      PIPELINE_WORKERS: 16
       xpack.monitoring.elasticsearch.hosts: ${ELASTICSEARCH_HOSTS}
       TZ: Asia/Seoul
       LS_JAVA_OPTS: "-Xms512m -Xmx512m"

@@ -1,2 +1,0 @@
--- SELECT * FROM product.TB_SEARCH_GOODS_DATA
--- WHERE offset > :sql_last_value
