@@ -31,3 +31,4 @@ FROM
 						having sum(cnt) >= 20
 ) total
 GROUP BY mall_tp, keyword
+AND    offset > :sql_last_value
