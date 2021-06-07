@@ -21,13 +21,13 @@ FROM
 									HAVING sum(cnt) >= 2
         UNION
         
-        SELECT keyword, sum(cnt) cnt, sum(cnt) all_cnt,upper(case when mall_tp='inter' then 'shop' else mall_tp end)mall_tp
+        SELECT keyword, sum(cnt) cnt, sum(cnt) all_cnt,upper(mall_tp) mall_tp
 						FROM DMS.dms_all_autocmpl_keyword
 						WHERE mall_tp in ('shop','inter','book','pet')
 						AND time_key > date_add(curdate(), INTERVAL '-60' DAY)
 						AND char_length(trim(keyword)) < 61
 						AND char_length(trim(keyword)) > 2
-						GROUP BY upper(case when mall_tp='inter' then 'shop' else mall_tp end), keyword
+						GROUP BY upper(mall_tp), keyword
 						having sum(cnt) >= 20
 ) total
 GROUP BY mall_tp, keyword
