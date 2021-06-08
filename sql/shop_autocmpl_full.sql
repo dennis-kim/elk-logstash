@@ -1,5 +1,6 @@
 SELECT 
-	mall_tp
+	(CASE WHEN mall_tp = 'INTER' THEN mall_tp ELSE 'SHOP' END) index_type
+	, mall_tp
     , keyword
     , SUM(cnt) cnt
     , SUM(all_cnt) all_cnt
@@ -24,7 +25,7 @@ FROM
         SELECT keyword, sum(cnt) cnt, sum(cnt) all_cnt,upper(mall_tp) mall_tp
 						FROM DMS.dms_all_autocmpl_keyword
 						WHERE mall_tp in ('shop','inter','book','pet')
-						AND time_key > date_add(curdate(), INTERVAL '-60' DAY)
+						--AND time_key > date_add(curdate(), INTERVAL '-60' DAY)
 						AND char_length(trim(keyword)) < 61
 						AND char_length(trim(keyword)) > 2
 						GROUP BY upper(mall_tp), keyword
