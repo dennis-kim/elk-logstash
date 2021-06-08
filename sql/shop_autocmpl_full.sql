@@ -1,6 +1,5 @@
 SELECT 
-	(CASE WHEN mall_tp = 'INTER' THEN mall_tp ELSE 'SHOP' END) index_type
-	, mall_tp
+	mall_tp
     , keyword
     , SUM(cnt) cnt
     , SUM(all_cnt) all_cnt
